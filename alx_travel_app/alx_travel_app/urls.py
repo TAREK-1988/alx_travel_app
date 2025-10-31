@@ -1,3 +1,5 @@
+
+# alx_travel_app/alx_travel_app/urls.py
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import permissions
@@ -5,21 +7,14 @@ from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
 schema_view = get_schema_view(
-    openapi.Info(
-        title="ALX Travel App API",
-        default_version='v1',
-        description="API documentation for alx_travel_app",
-    ),
+    openapi.Info(title="ALX Travel App API", default_version='v1',
+                 description="API docs for alx_travel_app"),
     public=True,
     permission_classes=(permissions.AllowAny,),
 )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/listings/', include('listings.urls')),  # ربط URLs التطبيق
-
-    # Swagger على /swagger/
+    path('api/listings/', include('listings.urls')),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    # اختياري: مسارات إضافية
-    # path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ]
